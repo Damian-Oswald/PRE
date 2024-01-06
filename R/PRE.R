@@ -13,17 +13,20 @@
 #' @param verbose Should a success message be printed after a model run?
 #' 
 #' @export
-runPRE <- function(data, column, depth, date, nonNegative = FALSE, n = 200, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
+PRE <- function(data, column, depth, date, nonNegative = FALSE, n = 100, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
+    
+    # make sure 50% is in quantiles
+    if(!0.5%in%quantiles) quantiles <- append(quantiles, 0.5, after=length(quantiles)%/%2)
     
     # run repeatedly with varying starting values using the multistart package
-    solution <- multiStart(par = matrix(runif(n*3, 0, 40), ncol = 3),
-                           fn = stateEquations,
-                           action = "solve",
-                           control = list(tol = 1e3),
-                           details = FALSE,
-                           quiet = TRUE,
-                           e = unlist(getEpsilons()),
-                           fluxes = as.list(data[data$column==column & data$depth==depth & data$date==date,]))
+    solution <- BB::multiStart(par = matrix(runif(n*3, 0, 40), ncol = 3),
+                               fn = PRE::stateEquations,
+                               action = "solve",
+                               control = list(tol = 1e3),
+                               details = FALSE,
+                               quiet = TRUE,
+                               e = unlist(getEpsilons()),
+                               fluxes = as.list(data[data$column==column & data$depth==depth & data$date==date,]))
     
     # select all the converged solutions
     solution <- with(solution, par[converged,])
