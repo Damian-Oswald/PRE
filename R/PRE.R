@@ -35,9 +35,6 @@ PRE <- function(data, column, depth, date, nonNegative = FALSE, n = 100, quantil
     # select only solutions for which all (estimated) processes are is non-negative
     if(nonNegative) solution <- solution[apply(solution, 1, function(x) all(x>0)),]
     
-    # print out a success message
-    if(verbose) cat(sprintf("\rPRE run with %s solutions (C%s D%s %s)", nrow(solution), column, depth, as.character(as.Date(date))))
-    
     # return the quantiles on the solution
     apply(solution, 2, quantile, probs = quantiles)
 }
