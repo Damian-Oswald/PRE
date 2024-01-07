@@ -13,16 +13,20 @@
 #' @param verbose Should a success message be printed after a model run?
 #' 
 #' @export
-longPRE <- function(data, column, depth, n = 100, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
+longPRE <- function(data, column, depth, n = 100, epsilons = getEpsilons(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
     
     # make sure 50% is in quantiles
+    # TODO: throw an error if quantiles doesn't match requirements; leads to less problems later on.
     if(!0.5%in%quantiles) quantiles <- append(quantiles, 0.5, after=length(quantiles)%/%2)
     
     # read out all dates on which we have data available
     dates <- data[data$column==column & data$depth==depth, "date"]
     
     # run the PRE for every date, save the results as a list
-    results <- lapply(dates, function(x) PRE::PRE(data = data, column = column, depth = depth, date = x, n = n, quantiles = quantiles, nonNegative = FALSE))
+    results <- lapply(dates, function(x) {
+        x <- PRE::PRE(data = data, column = column, depth = depth, date = x, n = n, epsilons = epsilons, tolerance = tolerance, nonNegative = nonNegative)
+        return(apply(x, 2, quantile, probs = quantiles))
+    })
     
     # create the column names of the results based on variables and quantiles
     colnames <- apply(expand.grid(colnames(results[[1]]),rownames(results[[1]])), 1, paste, collapse = "_")

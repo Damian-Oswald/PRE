@@ -9,6 +9,8 @@ longPRE(
   column,
   depth,
   n = 100,
+  epsilons = getEpsilons(),
+  tolerance = 1000,
   nonNegative = FALSE,
   quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975)
 )
