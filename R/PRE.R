@@ -13,28 +13,30 @@
 #' @param verbose Should a success message be printed after a model run?
 #' 
 #' @export
-PRE <- function(data, column, depth, date, nonNegative = FALSE, n = 100, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
-    
-    # make sure 50% is in quantiles
-    if(!0.5%in%quantiles) quantiles <- append(quantiles, 0.5, after=length(quantiles)%/%2)
+PRE <- function(data, column, depth, date, nonNegative = FALSE, n = 100, epsilons = getEpsilons(), tolerance = 1e3, verbose = TRUE) {
     
     # run repeatedly with varying starting values using the multistart package
     solution <- BB::multiStart(par = matrix(runif(n*3, 0, 40), ncol = 3),
                                fn = PRE::stateEquations,
                                action = "solve",
-                               control = list(tol = 1e3),
+                               control = list(tol = tolerance),
                                details = FALSE,
                                quiet = TRUE,
-                               e = unlist(getEpsilons()),
+                               e = unlist(epsilons),
                                fluxes = as.list(data[data$column==column & data$depth==depth & data$date==date,]))
     
     # select all the converged solutions
     solution <- with(solution, par[converged,])
-    colnames(solution) = c("N2Onit", "N2Oden", "N2Ored")
+    colnames(solution) = c("Nitrification", "Denitrification", "Reduction")
     
     # select only solutions for which all (estimated) processes are is non-negative
     if(nonNegative) solution <- solution[apply(solution, 1, function(x) all(x>0)),]
     
-    # return the quantiles on the solution
-    apply(solution, 2, quantile, probs = quantiles)
+    # assign class to solution
+    solution <- as.data.frame(solution)
+    class(solution) <- c("PRE","data.frame")
+    
+    # return solutions
+    return(solution)
+
 }

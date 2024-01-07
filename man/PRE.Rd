@@ -11,7 +11,8 @@ PRE(
   date,
   nonNegative = FALSE,
   n = 100,
-  quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975),
+  epsilons = getEpsilons(),
+  tolerance = 1000,
   verbose = TRUE
 )
 }
@@ -28,9 +29,9 @@ PRE(
 
 \item{n}{The number of samples solved with the \link[BB:multiStart]{BB::multiStart} solver.}
 
-\item{quantiles}{The probabilities of the quantiles to be returned from the sampled set.}
-
 \item{verbose}{Should a success message be printed after a model run?}
+
+\item{quantiles}{The probabilities of the quantiles to be returned from the sampled set.}
 }
 \description{
 This function runs the Process Rate Estimator (PRE) on a specific depth, column and date.

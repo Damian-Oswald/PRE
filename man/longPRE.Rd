@@ -4,7 +4,14 @@
 \alias{longPRE}
 \title{Run the Process Rate Estimator on all dates for one experimental unit}
 \usage{
-longPRE(data, column, depth, n = 100, nonNegative = FALSE)
+longPRE(
+  data,
+  column,
+  depth,
+  n = 100,
+  nonNegative = FALSE,
+  quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975)
+)
 }
 \arguments{
 \item{data}{A data frame with all relevant variables to run the Process Rate Estimator.}
@@ -17,9 +24,9 @@ longPRE(data, column, depth, n = 100, nonNegative = FALSE)
 
 \item{nonNegative}{Should negative solutions be removed before retrieving the quantiles?}
 
-\item{date}{The date (\code{DD-MM-YYYY}) for which we want to run the PRE.}
-
 \item{quantiles}{The probabilities of the quantiles to be returned from the sampled set.}
+
+\item{date}{The date (\code{DD-MM-YYYY}) for which we want to run the PRE.}
 
 \item{verbose}{Should a success message be printed after a model run?}
 }
