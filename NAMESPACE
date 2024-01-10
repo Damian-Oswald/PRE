@@ -3,6 +3,7 @@
 S3method(plot,PRE)
 S3method(plot,longPRE)
 S3method(print,PRE)
+S3method(print,longPRE)
 export(PRE)
 export(calculateFluxes)
 export(crossValidate)
