@@ -9,6 +9,6 @@ plot.PRE <- function (x, col = "grey") {
         lines(x = 1:3, y = x[i,], col = col, pch = 16, cex = 0.8, type = "o", lwd = 0.3)
     }
     boxplot(x, add = TRUE, lty = 1, axes = FALSE, col = "transparent", boxwex = 0.2, outline = FALSE)
-    axis(1, 1:3, colnames(x))
+    axis(1, 1:3, colnames(x), col = NA)
     axis(2, las = 1)
 }

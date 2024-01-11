@@ -12,7 +12,8 @@ longPRE(
   epsilons = getEpsilons(),
   tolerance = 1000,
   nonNegative = FALSE,
-  quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975)
+  quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975),
+  verbose = TRUE
 )
 }
 \arguments{
@@ -28,9 +29,9 @@ longPRE(
 
 \item{quantiles}{The probabilities of the quantiles to be returned from the sampled set.}
 
-\item{date}{The date (\code{DD-MM-YYYY}) for which we want to run the PRE.}
+\item{verbose}{Should a progress bar be printed?}
 
-\item{verbose}{Should a success message be printed after a model run?}
+\item{date}{The date (\code{DD-MM-YYYY}) for which we want to run the PRE.}
 }
 \description{
 This function runs the Process Rate Estimator (PRE) on a specific depth and column, but on all available dates.

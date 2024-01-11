@@ -10,32 +10,31 @@
 #' @param nonNegative Should negative solutions be removed before retrieving the quantiles?
 #' @param n The number of samples solved with the [BB::multiStart] solver.
 #' @param quantiles The probabilities of the quantiles to be returned from the sampled set.
-#' @param verbose Should a success message be printed after a model run?
+#' @param verbose Should a progress bar be printed?
 #' 
 #' @export
-longPRE <- function(data, column, depth, n = 100, epsilons = getEpsilons(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
+longPRE <- function(data, column, depth, n = 100, epsilons = getEpsilons(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
     
-    # make sure 50% is in quantiles
-    # TODO: throw an error if quantiles doesn't match requirements; leads to less problems later on.
-    if(!0.5%in%quantiles) quantiles <- append(quantiles, 0.5, after=length(quantiles)%/%2)
+    # make sure that the "center" of the quantiles is equal to 0.5, and that the quantiles are symmetric
+    l <- length(quantiles)
+    centerIsZeroPointFive <- isTRUE(all.equal(quantiles[l%/%2+1],0.5))
+    quantilesAreSymmetric <- isTRUE(all.equal(head(quantiles,l%/%2)+rev(tail(quantiles,l%/%2)),rep(1,l%/%2)))
+    if(!centerIsZeroPointFive | !quantilesAreSymmetric) stop("The chosen quantiles violate the minimal condition. Make sure that the quantiles (1) contain 0.5 and (2) are symmetric.")
     
     # read out all dates on which we have data available
     dates <- data[data$column==column & data$depth==depth, "date"]
     
-    # run the PRE for every date, save the results as a list
-    results <- lapply(dates, function(x) {
-        x <- PRE::PRE(data = data, column = column, depth = depth, date = x, n = n, epsilons = epsilons, tolerance = tolerance, nonNegative = nonNegative)
-        return(apply(x, 2, quantile, probs = quantiles))
-    })
+    # create an empty data frame with columns for all combinations of quantiles and processes
+    results <- data.frame(matrix(NA, ncol = 3*l, nrow = length(dates)))
+    rownames(results) <- dates
+    colnames(results) <- PRE:::getPercentNames(quantiles)
     
-    # create the column names of the results based on variables and quantiles
-    colnames <- apply(expand.grid(colnames(results[[1]]),rownames(results[[1]])), 1, paste, collapse = "_")
-    
-    # restructure the results array-like list to a data frame
-    results <- t(sapply(results, function(x) as.numeric(t(x))))
-    
-    # assign the created column names
-    colnames(results) <- colnames
+    # loop over every date, run PRE, save result in data frame
+    for (t in 1:length(dates)) {
+        x <- PRE::PRE(data = data, column = column, depth = depth, date = dates[t], n = n, epsilons = epsilons, tolerance = tolerance, nonNegative = nonNegative)
+        results[t,] <- as.numeric(t(apply(x, 2, quantile, probs = quantiles)))
+        if(verbose) progressbar(t,length(dates))
+    }
     
     # combine the results with the relevant subset of the data and return it
     df <- cbind(data[data$column==column&data$depth==depth,], results)
