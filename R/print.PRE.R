@@ -11,6 +11,6 @@ print.PRE <- function (x) {
     print(signif(apply(x, 2, quantile, probs = c(0.025, 0.75, 0.5, 0.25, 0.975)), 3))
     f("-")
     r <- sum(apply(x, 1, function(z) any(z<0)))
-    cat(sprintf("%s solutions have estimated negative rates (%s%%).\n",r,r/nrow(x)))
+    cat(sprintf("%s solutions have estimated negative rates (%s%%).\n",r,signif(100*(r/nrow(x)),3)))
     f("=")
 }
