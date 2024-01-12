@@ -4,7 +4,7 @@
 \alias{getMissing}
 \title{Interpolate missing measurement data using kernel regression}
 \usage{
-getMissing(data = PRE::measurements, hyperparameters)
+getMissing(data = getN2ON(), hyperparameters = PRE::hyperparameters)
 }
 \arguments{
 \item{data}{The original data we wish to interpolate. Needs to have the same variables as \link{measurements}.}

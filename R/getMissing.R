@@ -6,7 +6,7 @@
 #' @param hyperparameters An array of hyperparameters (bandwidths) used in the kernel regression process.
 #' 
 #' @export
-getMissing <- function(data = PRE::measurements, hyperparameters) {
+getMissing <- function(data = getN2ON(), hyperparameters = PRE::hyperparameters) {
     
     for (variable in dimnames(hyperparameters)[[3]]) {
         for (column in dimnames(hyperparameters)[[2]]) {

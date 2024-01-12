@@ -8,7 +8,7 @@
 #' @param parameters A set of parameters as returned by the function [`getParameters`]. These will be used in calculating the returned flux data.
 #' 
 #' @export
-calculateFluxes <- function(data = PRE::measurements, parameters = PRE::getParameters()) {
+calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters()) {
     
     # attach the parameters to function environment
     list2env(parameters, environment())

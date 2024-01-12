@@ -4,7 +4,7 @@
 \alias{calculateFluxes}
 \title{Calculate fluxes from measurement data}
 \usage{
-calculateFluxes(data = PRE::measurements, parameters = PRE::getParameters())
+calculateFluxes(data = getMissing(), parameters = PRE::getParameters())
 }
 \arguments{
 \item{data}{Measurement data from which one wants to calculate fluxes.
