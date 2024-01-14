@@ -2,18 +2,24 @@
 % Please edit documentation in R/getN2ON.R
 \name{getN2ON}
 \alias{getN2ON}
-\title{Calculate the volumetric and area N2O-N}
+\title{Calculate the volumetric and area N₂O-N}
 \usage{
-getN2ON(data = PRE::measurements, parameters = getParameters())
+data <- getN2ON(data = PRE::measurements,
+                parameters = getParameters())
 }
 \arguments{
-\item{data}{The original data we wish to interpolate. Needs to have the same variables as \link{measurements}.}
+\item{data}{A data set of original measurements in the form of \link{measurements}.}
+
+\item{parameters}{A list of parameters to be used for the calculation of \code{N2ONvolume} and \code{N2ONarea}. To see how to use alternative parameters, visit \link{getParameters}.}
 }
 \description{
-This function calculates the volumetric and the area N2O-N from the soil N2O concentration (as stored in the variable \code{N2O} of \code{\link{measurements}}).
+This function calculates the volumetric and the area N₂O-N from the soil N₂O concentration (as stored in the variable \code{N2O} of \code{\link{measurements}}).
 }
 \details{
-In order to calculate the volume N2O-N, the following equation is used:
+In order to calculate the volume N₂O-N, the following equation is used:
 \deqn{\text N_2 \text {O-N}_\text{volume} =  \frac{28[\text{N}_2\text O]}{\text {R} \cdot \text {T}}}
 Where \eqn{\text R} is the gas constant and \eqn{\text T} is the temperature.
+In a second step, the per-area N₂O-N is calculated from the volumetric N₂O-N.
+\deqn{\text N_2 \text {O-N}_\text{area} = \text N_2 \text {O-N}_\text{volume} \times \frac{1}{100} \texttt{increment} \times \frac{10^4}{10^3} \left(\theta_t - \texttt{moisture} \right)}
+Note that the scalar values handle the unit conversions.
 }

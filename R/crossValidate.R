@@ -12,14 +12,30 @@
 #' 
 #' @export
 crossValidate <- function (FUN, x, y, k = nrow(x), r = 1, hyperparameter = NULL) {
+   
+   # create an empty data frame for the results of the cross-validation
    results <- data.frame()
+   
+   # repeat the k-fold cross-validation `r` times
    for (R in 1:r) {
+      
+      # create a matrix with random indices; the dimensions of the matrix match `k` and the (maximum) fold sizes
       I <- matrix(c(sample(1:nrow(x)), rep(NA, k - nrow(x)%%k)), ncol = k, byrow = TRUE)
+      
+      # loop over every fold
       for (K in 1:k) {
+         
+         # save the indices for this specific fold
          i <- na.omit(I[,K])
+         
+         # run the function `FUN` with the specific observations of this fold
          result <- cbind(cost = FUN(x_train = x[-i,], y_train = y[-i,], x_test = x[i,], y_test = y[i,], hyperparameter = hyperparameter), r = R, k = K)
+         
+         # attach the results of this model run to the overall results
          results <- rbind(results, result)
       }
    }
+   
+   # return the results of the cross validation
    return(results)
 }

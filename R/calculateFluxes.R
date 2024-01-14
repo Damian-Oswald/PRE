@@ -1,12 +1,43 @@
 #' @title Calculate fluxes from measurement data
 #' 
 #' @description
-#' This function calculates fluxes from measurement data (e.g. `PRE::measurements`).
+#' This function calculates nitrous oxide and other fluxes from measurement data, e.g. [PRE::measurements].
 #' 
 #' @param data Measurement data from which one wants to calculate fluxes.
 #' Needs to include variables `date`, `column`, `depth`, `increment`, `moisture`, `N2O`, `CO2`, `SP`, and `d18O`. For further details, read the description of the [`measurements`] data.
 #' @param parameters A set of parameters as returned by the function [`getParameters`]. These will be used in calculating the returned flux data.
 #' @param verbose Logical. Should a progress bar be printed?
+#' 
+#' @examples
+#' # load the parameters with an alternative parameter value
+#' parameters <- getParameters(BD = 1.7)
+#' 
+#' # calculate N2O-N
+#' data <- getN2ON(data = PRE::measurements, parameters = parameters)
+#' 
+#' # interpolate the missing values based on the bandwidths in `hyperparameters` (This function interpolates all values over time; and it also computes and adds the derivatives)
+#' data <- getMissing(data = data, hyperparameters = PRE::hyperparameters)
+#' 
+#' # calculate fluxes from measurement data (This function calculates all necessary parameters from the data)
+#' data <- calculateFluxes(data = data, parameters = parameters)
+#' 
+#' # look at the resulting data frame
+#' View(data)
+#' 
+#' @details
+#' This function calculates a range of parameters and variables according to the equations listed below.
+#' First, the mean moisture between two depth increments \eqn{\theta_w} is calculated.
+#' \deqn{\theta_{w} = \frac{1}{2}(m_d + m_{d+1})}
+#' From this, the air-filled pore space is computed.
+#' \deqn{\theta_{a} = 1-\frac{\theta_{w}}{\theta_{t}}}
+#' In a next step, the Gas diffusion coefficient is calculated.
+#' \deqn{D_{\text s} = \left( \frac{\theta_w^{10/3} + D_{\text fw}}{H} + \theta_a^{10/3} \times D_{\text fa} \right) \times \theta_T^{-2}}
+#' Note that the diffusivity of N₂O in air \eqn{D_{\text fa}} is a fixed value that is computed by the [getParameters] function.
+#' With all of these values prepared, the N₂O gradient (\eqn{\frac{dC}{dZ}}) is computed.
+#' Note that the atmospheric nitrous oxide concentration is once again defined passed by the [getParameters] function.
+#' Finally, the N₂O flux is calculated as:
+#' \deqn{F_{\text{calc}} = \frac{dC}{dZ} D_{\text s} \rho}
+#' Here, \eqn{\rho} is the gas density of N₂O.
 #' 
 #' @export
 calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters(), verbose = TRUE) {
