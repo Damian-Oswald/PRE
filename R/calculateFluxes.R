@@ -6,9 +6,10 @@
 #' @param data Measurement data from which one wants to calculate fluxes.
 #' Needs to include variables `date`, `column`, `depth`, `increment`, `moisture`, `N2O`, `CO2`, `SP`, and `d18O`. For further details, read the description of the [`measurements`] data.
 #' @param parameters A set of parameters as returned by the function [`getParameters`]. These will be used in calculating the returned flux data.
+#' @param verbose Logical. Should a progress bar be printed?
 #' 
 #' @export
-calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters()) {
+calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters(), verbose = TRUE) {
     
     # attach the parameters to function environment
     list2env(parameters, environment())
@@ -37,6 +38,8 @@ calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters
         # calculate F_calc, considering flux is upward (originally in mg N2O-N/m2/s, converted to g N/ha/day)
         data[i,"F"] <- with(data[i,], dCdZ * Ds * rho * 10000 * 3600 * 24/1000)
         
+        # print out a progress bar
+        if(verbose) PRE::progressbar(i, nrow(data)*2)
     }
     
     # start a new loop, to make sure all `F` have been calculated already
@@ -80,6 +83,8 @@ calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters
             data[i, "d18O_top"] <- ifelse(length(data[i_top, "d18O"])==1, data[i_top, "d18O"], NA)
         }
         
+        # print out a progress bar
+        if(verbose) PRE::progressbar(nrow(data)+i, nrow(data)*2)
     }
     
     return(data)

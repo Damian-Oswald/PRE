@@ -36,7 +36,7 @@ plot.longPRE <- function (x, which = c("Interpolation", "Nitrification", "Denitr
         ylab_names <- list(
             N2ONarea = expression("N"[2]*"O - N"[area]),
             SP = "Site preference",
-            d18O = expression("δ"^18*"O")
+            d18O = expression("delta"^18*"O")
         )
         par(mar = c(3,4,0,2)+0.1)
         for (variable in c("N2ONarea","SP","d18O")) {

@@ -4,13 +4,19 @@
 \alias{calculateFluxes}
 \title{Calculate fluxes from measurement data}
 \usage{
-calculateFluxes(data = getMissing(), parameters = PRE::getParameters())
+calculateFluxes(
+  data = getMissing(),
+  parameters = PRE::getParameters(),
+  verbose = TRUE
+)
 }
 \arguments{
 \item{data}{Measurement data from which one wants to calculate fluxes.
 Needs to include variables \code{date}, \code{column}, \code{depth}, \code{increment}, \code{moisture}, \code{N2O}, \code{CO2}, \code{SP}, and \code{d18O}. For further details, read the description of the \code{\link{measurements}} data.}
 
 \item{parameters}{A set of parameters as returned by the function \code{\link{getParameters}}. These will be used in calculating the returned flux data.}
+
+\item{verbose}{Logical. Should a progress bar be printed?}
 }
 \description{
 This function calculates fluxes from measurement data (e.g. \code{PRE::measurements}).

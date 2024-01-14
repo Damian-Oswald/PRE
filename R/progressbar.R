@@ -5,7 +5,6 @@
 #' 
 #' @export
 progressbar <- function (i, n) {
-   w <- (options("width")$width - 7)/n
-   cat("\r[", strrep("=", ceiling(i * w)), ">", strrep("-", floor((n - i) * w)), "] ", paste0(format(round(i/n * 100, 1), nsmall = 1), "%"), sep = "")
+   w <- (options("width")$width - 8)/n
+   cat("\r[", strrep("|", ceiling(i * w)), ">", strrep("-", floor((n - i) * w)), "] ", paste0(format(round(i/n * 100, 1), nsmall = 1), "%"), sep = "")
 }
-
