@@ -4,7 +4,12 @@
 \alias{plot.longPRE}
 \title{Generic plot function for a \code{longPRE} class object}
 \usage{
-\method{plot}{longPRE}(x, which = c("Nitrification", "Denitrification", "Reduction"))
+\method{plot}{longPRE}(
+  x,
+  which = c("Interpolation", "Nitrification", "Denitrification", "Reduction"),
+  ylim.variable = list(N2ONarea = c(0, 10), SP = c(-10, 25), d18O = c(20, 55)),
+  ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA)
+)
 }
 \arguments{
 \item{x}{The output of the process rate estimator (over time) function \code{longPRE}.}
