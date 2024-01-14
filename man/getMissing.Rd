@@ -12,5 +12,7 @@ getMissing(data = getN2ON(), hyperparameters = PRE::hyperparameters)
 \item{hyperparameters}{An array of hyperparameters (bandwidths) used in the kernel regression process.}
 }
 \description{
-This function interpolates the missing values of all variable names in \code{hyperparameters}. Also, it returns the derivatives of the smoothing functions used.
+This function interpolates the missing values of all variable names in \code{hyperparameters}.
+Also, it returns the derivatives of the smoothing functions used.
+For both procedures, it calls the \link{getDerivative} function -- simply with \code{n = 0} and \code{n = 1}.
 }

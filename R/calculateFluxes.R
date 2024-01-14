@@ -13,11 +13,8 @@ calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters
     # attach the parameters to function environment
     list2env(parameters, environment())
     
-    # save index vector of complete observations
-    complete <- data |> apply(2, is.na) |> apply(1, any) |> PRE::invert() |> which()
-    
     # loop through every complete observation in the data frame
-    for (i in complete) {
+    for (i in 1:nrow(data)) {
         
         # attach the related indices and masks of the current index i to the search path
         list2env(PRE::getIndices(data, i, parameters), environment())
@@ -43,7 +40,7 @@ calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters
     }
     
     # start a new loop, to make sure all `F` have been calculated already
-    for (i in complete) {
+    for (i in 1:nrow(data)) {
         
         # attach the related indices and masks of the current index i to the search path
         list2env(PRE::getIndices(data, i, parameters), environment())
