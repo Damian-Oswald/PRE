@@ -1,7 +1,7 @@
 #' @title Get the isotope end members
 #' 
 #' @param SPnit Site preference nitrification \insertCite{lewicka2017quantifying}{PRE}.
-#' @param SPden Lewicka-Szceback for SPden.
+#' @param SPden Site preference denitrification \insertCite{lewicka2017quantifying}{PRE}.
 #' @param eSPdiffusion Well et al. 2008 for eSPdiffusion.
 #' @param eSPred Lewicka-Szceback for eSPred.
 #' @param d18Onit Lewicka-Szceback for d18Onit.

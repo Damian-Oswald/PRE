@@ -2,7 +2,7 @@
 #' 
 #' @description The state equation set are the core of the process rate estimator (PRE).
 #' 
-#' @param x Vector with starting values of `N2Onit`, `N2Oden`, and `N2Ored`.
+#' @param x Vector with starting values of N₂O `Nitification`, `Denitrification`, and `Reduction`.
 #' @param e Vector of the isotope end members.
 #' @param derivatives Derivatives of `N2ONarea`, `SP` and `d18O` with respect to time.
 #' @param fluxes Values of `N2ONarea`, `SP` and `d18O` as well as their fluxes from other increments.
@@ -24,3 +24,5 @@ stateEquations <- function(x = c(N2Onit = NA, N2Oden = NA, N2Ored = NA),
       return(f)
    })
 }
+
+
