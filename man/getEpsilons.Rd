@@ -16,21 +16,21 @@ getEpsilons(
 )
 }
 \arguments{
-\item{SPnit}{Site preference nitrification \insertCite{lewicka2017quantifying}{PRE}.}
+\item{eta_SP_diffusion}{End member for diffusion of site-preference \insertCite{well2008isotope}{PRE}.}
 
-\item{SPden}{Lewicka-Szceback for SPden.}
+\item{eta_18O_diffusion}{End member for diffusion of \code{d18O} \insertCite{well2008isotope}{PRE}.}
 
-\item{eSPdiffusion}{Well et al. 2008 for eSPdiffusion.}
+\item{SP_nitrification}{Site-preference for nitrification \insertCite{decock2013potential}{PRE}.}
 
-\item{eSPred}{Lewicka-Szceback for eSPred.}
+\item{d18O_nitrification}{\code{d18O} for nitrification \insertCite{lewicka2017quantifying}{PRE}.}
 
-\item{d18Onit}{Lewicka-Szceback for d18Onit.}
+\item{SP_denitrification}{Site-preference for denitrification \insertCite{decock2013potential}{PRE}.}
 
-\item{d18Oden}{Lewicka-Szceback for d18Oden.}
+\item{d18O_denitrification}{\code{d18O} for denitrification \insertCite{lewicka2017quantifying}{PRE}.}
 
-\item{e18Odiffusion}{e18Odiffusion \insertCite{well2008isotope}{PRE}.}
+\item{eta_SP_reduction}{End member for SP reduction \insertCite{denk2017nitrogen}{PRE}.}
 
-\item{e18Ored}{Lewicka-Szceback e18Ored.}
+\item{eta_18O_reduction}{End member for \code{d18O} reduction \insertCite{lewicka2017quantifying}{PRE}.}
 }
 \value{
 A list of the eight isotope end members analogous to the function arguments.

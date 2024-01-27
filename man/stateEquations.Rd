@@ -12,7 +12,7 @@ stateEquations(
 )
 }
 \arguments{
-\item{x}{Vector with starting values of \code{N2Onit}, \code{N2Oden}, and \code{N2Ored}.}
+\item{x}{Vector with starting values of N₂O \code{Nitification}, \code{Denitrification}, and \code{Reduction}.}
 
 \item{e}{Vector of the isotope end members.}
 
