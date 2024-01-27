@@ -13,7 +13,7 @@
 #' @param verbose Should a progress bar be printed?
 #' 
 #' @export
-longPRE <- function(data, column, depth, n = 100, epsilons = getEpsilons(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
+longPRE <- function(data, column, depth, n = 100, parameters = getEpsilons(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
     
     # make sure that the "center" of the quantiles is equal to 0.5, and that the quantiles are symmetric
     l <- length(quantiles)
@@ -31,7 +31,7 @@ longPRE <- function(data, column, depth, n = 100, epsilons = getEpsilons(), tole
     
     # loop over every date, run PRE, save result in data frame
     for (t in 1:length(dates)) {
-        x <- PRE::PRE(data = data, column = column, depth = depth, date = dates[t], n = n, epsilons = epsilons, tolerance = tolerance, nonNegative = nonNegative)
+        x <- PRE::PRE(data = data, column = column, depth = depth, date = dates[t], n = n, parameters = parameters, tolerance = tolerance, nonNegative = nonNegative)
         results[t,] <- as.numeric(t(apply(x, 2, quantile, probs = quantiles)))
         if(verbose) progressbar(t,length(dates))
     }

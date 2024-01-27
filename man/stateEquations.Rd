@@ -5,20 +5,19 @@
 \title{State equation set}
 \usage{
 stateEquations(
-  x = c(N2Onit = NA, N2Oden = NA, N2Ored = NA),
-  e = unlist(getEpsilons()),
+  x = c(Nitrification = NA, Denitrification = NA, Reduction = NA),
+  parameters = getEpsilons(),
   fluxes = list(F_top_in = NA, F_bottom_in = NA, F_out = NA, SP_top = NA, SP = NA,
-    SP_bottom = NA, N2ONarea = NA, d18O_top = NA, d18O_bottom = NA, d18O = NA)
+    SP_bottom = NA, N2ONarea = NA, d18O_top = NA, d18O_bottom = NA, d18O = NA,
+    N2ONarea_derivative = NA, SP_derivative = NA, d18O_derivative = NA)
 )
 }
 \arguments{
-\item{x}{Vector with starting values of N₂O \code{Nitification}, \code{Denitrification}, and \code{Reduction}.}
+\item{x}{A vector with the named values of N₂O \code{Nitification}, \code{Denitrification}, and \code{Reduction}.}
 
-\item{e}{Vector of the isotope end members.}
+\item{parameters}{A list of parameters containing the isotope end members. By default, the \code{\link{getParameters}} function is used to return these values.}
 
-\item{fluxes}{Values of \code{N2ONarea}, \code{SP} and \code{d18O} as well as their fluxes from other increments.}
-
-\item{derivatives}{Derivatives of \code{N2ONarea}, \code{SP} and \code{d18O} with respect to time.}
+\item{fluxes}{A list of \code{N2ONarea}, \code{SP} and \code{d18O} as well as their fluxes from other increments and derivative. Essentially, this is one row of the data as it's returned by the \code{\link{calculateFluxes}} function as a list.}
 }
 \description{
 The state equation set are the core of the process rate estimator (PRE).
