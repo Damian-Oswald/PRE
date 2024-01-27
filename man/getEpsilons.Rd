@@ -5,30 +5,30 @@
 \title{Get the isotope end members}
 \usage{
 getEpsilons(
-  SPnit = 34.4,
-  SPden = -2.4,
-  eSPdiffusion = 1.55,
-  eSPred = -5.3,
-  d18Onit = 36.5,
-  d18Oden = 11.1,
-  e18Odiffusion = -7.79,
-  e18Ored = 3 * eSPred
+  SP_nitrification = 34.4,
+  SP_denitrification = -2.4,
+  eta_SP_diffusion = 1.55,
+  eta_SP_reduction = -5.3,
+  d18O_nitrification = 36.5,
+  d18O_denitrification = 11.1,
+  eta_18O_diffusion = -7.79,
+  eta_18O_reduction = 3 * eta_SP_reduction
 )
 }
 \arguments{
-\item{eta_SP_diffusion}{End member for diffusion of site-preference \insertCite{well2008isotope}{PRE}.}
-
-\item{eta_18O_diffusion}{End member for diffusion of \code{d18O} \insertCite{well2008isotope}{PRE}.}
-
 \item{SP_nitrification}{Site-preference for nitrification \insertCite{decock2013potential}{PRE}.}
-
-\item{d18O_nitrification}{\code{d18O} for nitrification \insertCite{lewicka2017quantifying}{PRE}.}
 
 \item{SP_denitrification}{Site-preference for denitrification \insertCite{decock2013potential}{PRE}.}
 
-\item{d18O_denitrification}{\code{d18O} for denitrification \insertCite{lewicka2017quantifying}{PRE}.}
+\item{eta_SP_diffusion}{End member for diffusion of site-preference \insertCite{well2008isotope}{PRE}.}
 
 \item{eta_SP_reduction}{End member for SP reduction \insertCite{denk2017nitrogen}{PRE}.}
+
+\item{d18O_nitrification}{\code{d18O} for nitrification \insertCite{lewicka2017quantifying}{PRE}.}
+
+\item{d18O_denitrification}{\code{d18O} for denitrification \insertCite{lewicka2017quantifying}{PRE}.}
+
+\item{eta_18O_diffusion}{End member for diffusion of \code{d18O} \insertCite{well2008isotope}{PRE}.}
 
 \item{eta_18O_reduction}{End member for \code{d18O} reduction \insertCite{lewicka2017quantifying}{PRE}.}
 }

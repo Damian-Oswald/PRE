@@ -17,20 +17,20 @@
 #' \insertAllCited{}
 #' 
 #' @export
-getEpsilons <- function(SPnit = 34.4,
-                        SPden = -2.4,
-                        eSPdiffusion = 1.55,
-                        eSPred = -5.3,
-                        d18Onit = 36.5,
-                        d18Oden = 11.1,
-                        e18Odiffusion = -7.79,
-                        e18Ored = 3*eSPred) {
-        list(SPnit = SPnit,
-             SPden = SPden,
-             eSPdiffusion = eSPdiffusion,
-             eSPred = eSPred,
-             d18Onit = d18Onit,
-             d18Oden = d18Oden,
-             e18Odiffusion = e18Odiffusion,
-             e18Ored = e18Ored)
+getEpsilons <- function(SP_nitrification = 34.4,
+                        SP_denitrification = -2.4,
+                        eta_SP_diffusion = 1.55,
+                        eta_SP_reduction = -5.3,
+                        d18O_nitrification = 36.5,
+                        d18O_denitrification = 11.1,
+                        eta_18O_diffusion = -7.79,
+                        eta_18O_reduction = 3*eta_SP_reduction) {
+        list(SP_nitrification = SP_nitrification,
+             SP_denitrification = SP_denitrification,
+             eta_SP_diffusion = eta_SP_diffusion,
+             eta_SP_reduction = eta_SP_reduction,
+             d18O_nitrification = d18O_nitrification,
+             d18O_denitrification = d18O_denitrification,
+             eta_18O_diffusion = eta_18O_diffusion,
+             eta_18O_reduction = eta_18O_reduction)
 }
