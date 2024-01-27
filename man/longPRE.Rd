@@ -9,7 +9,7 @@ longPRE(
   column,
   depth,
   n = 100,
-  parameters = getEpsilons(),
+  parameters = getParameters(),
   tolerance = 1000,
   nonNegative = FALSE,
   quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975),
@@ -25,13 +25,15 @@ longPRE(
 
 \item{n}{The number of samples solved with the \link[BB:multiStart]{BB::multiStart} solver.}
 
+\item{parameters}{A list of parameters to be used to calculate the \code{\link{stateEquations}}.}
+
+\item{tolerance}{The convergence tolerance for the \link[BB:multiStart]{BB::multiStart} solver.}
+
 \item{nonNegative}{Should negative solutions be removed before retrieving the quantiles?}
 
 \item{quantiles}{The probabilities of the quantiles to be returned from the sampled set.}
 
 \item{verbose}{Should a progress bar be printed?}
-
-\item{date}{The date (\code{DD-MM-YYYY}) for which we want to run the PRE.}
 }
 \description{
 This function runs the Process Rate Estimator (PRE) on a specific depth and column, but on all available dates.

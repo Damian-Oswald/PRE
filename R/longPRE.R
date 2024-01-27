@@ -6,14 +6,15 @@
 #' @param data A data frame with all relevant variables to run the Process Rate Estimator.
 #' @param column The column name for which we want to run the PRE.
 #' @param depth The depth name for which we want to run the PRE.
-#' @param date The date (`DD-MM-YYYY`) for which we want to run the PRE.
-#' @param nonNegative Should negative solutions be removed before retrieving the quantiles?
 #' @param n The number of samples solved with the [BB::multiStart] solver.
+#' @param parameters A list of parameters to be used to calculate the [`stateEquations`].
+#' @param tolerance The convergence tolerance for the [BB::multiStart] solver.
+#' @param nonNegative Should negative solutions be removed before retrieving the quantiles?
 #' @param quantiles The probabilities of the quantiles to be returned from the sampled set.
 #' @param verbose Should a progress bar be printed?
 #' 
 #' @export
-longPRE <- function(data, column, depth, n = 100, parameters = getEpsilons(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
+longPRE <- function(data, column, depth, n = 100, parameters = getParameters(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
     
     # make sure that the "center" of the quantiles is equal to 0.5, and that the quantiles are symmetric
     l <- length(quantiles)

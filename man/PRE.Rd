@@ -11,7 +11,7 @@ PRE(
   date,
   nonNegative = FALSE,
   n = 100,
-  parameters = getEpsilons(),
+  parameters = getParameters(),
   tolerance = 1000,
   verbose = TRUE
 )

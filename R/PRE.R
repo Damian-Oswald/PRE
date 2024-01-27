@@ -13,7 +13,7 @@
 #' @param verbose Should a success message be printed after a model run?
 #' 
 #' @export
-PRE <- function(data, column, depth, date, nonNegative = FALSE, n = 100, parameters = getEpsilons(), tolerance = 1e3, verbose = TRUE) {
+PRE <- function(data, column, depth, date, nonNegative = FALSE, n = 100, parameters = getParameters(), tolerance = 1e3, verbose = TRUE) {
     
     # run repeatedly with varying starting values using the multistart package
     solution <- BB::multiStart(par = matrix(runif(n*3, 0, 40), ncol = 3),
