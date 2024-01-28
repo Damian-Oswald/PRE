@@ -16,6 +16,9 @@
 #' @export
 longPRE <- function(data, column, depth, n = 100, parameters = getParameters(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
     
+    # save names of the processes
+    processes <- c("Nitrification", "Denitrification", "Reduction")
+    
     # make sure that the "center" of the quantiles is equal to 0.5, and that the quantiles are symmetric
     l <- length(quantiles)
     centerIsZeroPointFive <- isTRUE(all.equal(quantiles[l%/%2+1],0.5))
@@ -26,14 +29,14 @@ longPRE <- function(data, column, depth, n = 100, parameters = getParameters(), 
     dates <- data[data$column==column & data$depth==depth, "date"]
     
     # create an empty data frame with columns for all combinations of quantiles and processes
-    results <- data.frame(matrix(NA, ncol = 3*l, nrow = length(dates)))
+    results <- data.frame(matrix(NA, ncol = 3+3*l, nrow = length(dates)))
     rownames(results) <- dates
-    colnames(results) <- PRE:::getPercentNames(quantiles)
+    colnames(results) <- c(processes, PRE:::getPercentNames(quantiles))
     
     # loop over every date, run PRE, save result in data frame
     for (t in 1:length(dates)) {
         x <- PRE::PRE(data = data, column = column, depth = depth, date = dates[t], n = n, parameters = parameters, tolerance = tolerance, nonNegative = nonNegative)
-        results[t,] <- as.numeric(t(apply(x, 2, quantile, probs = quantiles)))
+        results[t,] <- c(colMeans(x), as.numeric(t(apply(x, 2, quantile, probs = quantiles))))
         if(verbose) progressbar(t,length(dates))
     }
     
@@ -46,6 +49,7 @@ longPRE <- function(data, column, depth, n = 100, parameters = getParameters(), 
         column = column,
         depth = depth,
         n = n,
+        processes = colMeans(df[,processes]),
         quantiles = quantiles,
         nonNegative = nonNegative
     )
