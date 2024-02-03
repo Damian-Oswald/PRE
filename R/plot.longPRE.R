@@ -3,7 +3,7 @@
 #' @param x The output of the process rate estimator (over time) function `longPRE`.
 #' 
 #' @export
-plot.longPRE <- function (x, which = c("Interpolation", "Nitrification", "Denitrification","Reduction"), ylim.variable = list(N2ONarea = c(0,10),SP = c(-10,25), d18O = c(20,55)), ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA)) {
+plot.longPRE <- function (x, which = c("Interpolation", "Nitrification", "Denitrification","Reduction"), ylim.variable = list(N2ONarea = c(0,10),SP = c(-10,25), d18O = c(20,55)), ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA), col = "cadetblue") {
     
     # save vector with possible processes names
     processes = c("Nitrification", "Denitrification","Reduction")
@@ -69,7 +69,7 @@ plot.longPRE <- function (x, which = c("Interpolation", "Nitrification", "Denitr
         for (i in 1:(p%/%2)) {
             polygon(x = c(data[,"date"], rev(data[,"date"])),
                     y = c(data[,paste0(variable,q[i])], rev(data[,paste0(variable,q[p-i+1])])),
-                    col = adjustcolor("cadetblue", alpha.f = min(0.3*i,1)),
+                    col = adjustcolor(col, alpha.f = min(0.3*i,1)),
                     border = FALSE)
         }
         lines(x = data[,"date"], y = data[,paste0(variable,"_50%")], lwd = 1.5)

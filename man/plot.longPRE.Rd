@@ -8,7 +8,8 @@
   x,
   which = c("Interpolation", "Nitrification", "Denitrification", "Reduction"),
   ylim.variable = list(N2ONarea = c(0, 10), SP = c(-10, 25), d18O = c(20, 55)),
-  ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA)
+  ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA),
+  col = "cadetblue"
 )
 }
 \arguments{
