@@ -1,26 +1,35 @@
 #' @title Generic plot function for a `longPRE` class object
 #' 
 #' @param x The output of the process rate estimator (over time) function `longPRE`.
+#' @param which Select which part of the plot ought to be plotted. Possible values are `"Interpolation"` for the three driving variable plots, `"Nitrification"`, `"Denitrification"`, and `"Reduction"`.
+#' @param ylim.variable List of the y-axis limits for the driving variables. Must contain exactly three named numeric vectors of length 2. See default argument for reference.
+#' @param ylim.processes List of the y-axis limits for the estimated process rates. Must contain exactly three named numeric vectors of length 2. See default argument for reference.
+#' @param col Plotting color for the uncertainty ranges of the process rate estimates.
+#' @param layout Logical, should the layout be automatically determined? If `FALSE`, no graphical parameters are set.
 #' 
 #' @export
-plot.longPRE <- function (x, which = c("Interpolation", "Nitrification", "Denitrification","Reduction"), ylim.variable = list(N2ONarea = c(0,10),SP = c(-10,25), d18O = c(20,55)), ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA), col = "cadetblue") {
+plot.longPRE <- function (x, which = c("Interpolation", "Nitrification", "Denitrification","Reduction"), ylim.variable = list(N2ONarea = c(0,10), SP = c(-10,25), d18O = c(20,55)), ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA), col = "cadetblue", layout = TRUE) {
     
     # save vector with possible processes names
     processes = c("Nitrification", "Denitrification","Reduction")
     
-    # full component layout matrix
-    if("Interpolation"%in%which) {
-        L <- matrix(1:3, ncol = 3, byrow = TRUE)
-        if(any(processes%in%which)) {
-            L <- rbind(L, matrix((max(L)+rep(1:sum(processes%in%which),each=3)),ncol=3,byrow=T))
+    # set graphical parameters
+    if(layout) {
+        
+        # full component layout matrix
+        if("Interpolation"%in%which) {
+            L <- matrix(1:3, ncol = 3, byrow = TRUE)
+            if(any(processes%in%which)) {
+                L <- rbind(L, matrix((max(L)+rep(1:sum(processes%in%which),each=3)),ncol=3,byrow=T))
+            }
+        } else {
+            L <- matrix(1:sum(processes%in%which),ncol=1)
         }
-    } else {
-        L <- matrix(1:sum(processes%in%which),ncol=1)
+        
+        # save graphical parameter settings
+        par(oma = c(4,0,1,0)+0.1)
+        layout(mat = L)
     }
-    
-    # save graphical parameter settings
-    par(oma = c(4,0,1,0)+0.1)
-    layout(mat = L)
     
     # save the quantile name extensions (except the middle one, 50%)
     q <- x[["quantiles"]]

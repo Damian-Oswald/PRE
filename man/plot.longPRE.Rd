@@ -9,11 +9,22 @@
   which = c("Interpolation", "Nitrification", "Denitrification", "Reduction"),
   ylim.variable = list(N2ONarea = c(0, 10), SP = c(-10, 25), d18O = c(20, 55)),
   ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA),
-  col = "cadetblue"
+  col = "cadetblue",
+  layout = TRUE
 )
 }
 \arguments{
 \item{x}{The output of the process rate estimator (over time) function \code{longPRE}.}
+
+\item{which}{Select which part of the plot ought to be plotted. Possible values are \code{"Interpolation"} for the three driving variable plots, \code{"Nitrification"}, \code{"Denitrification"}, and \code{"Reduction"}.}
+
+\item{ylim.variable}{List of the y-axis limits for the driving variables. Must contain exactly three named numeric vectors of length 2. See default argument for reference.}
+
+\item{ylim.processes}{List of the y-axis limits for the estimated process rates. Must contain exactly three named numeric vectors of length 2. See default argument for reference.}
+
+\item{col}{Plotting color for the uncertainty ranges of the process rate estimates.}
+
+\item{layout}{Logical, should the layout be automatically determined? If \code{FALSE}, no graphical parameters are set.}
 }
 \description{
 Generic plot function for a \code{longPRE} class object
