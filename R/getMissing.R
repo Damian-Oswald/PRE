@@ -11,19 +11,19 @@
 #' @export
 getMissing <- function(data = getN2ON(), hyperparameters = PRE::hyperparameters) {
     
-    for (variable in dimnames(hyperparameters)[[3]]) {
+    for (variable in c("N2O","N2ONvolume","N2ONarea","SP","d18O")) {
         
         # make a copy of the *measured* variable, as the original variable will be overwritten
         data[,paste0(variable,"_measurement")] <- data[,variable]
         
         # loop over every column for which we have a hyperparameter available
-        for (column in dimnames(hyperparameters)[[2]]) {
+        for (column in unique(data[,"column"])) {
             
             # loop over every depth for which we have a hyperparameter available
-            for (depth in dimnames(hyperparameters)[[1]]) {
+            for (depth in unique(data[,"depth"])) {
                 
                 # save the indices of matching column and depths (selects all the respective dates)
-                indices <- which(data[,"column"]==column & data[,"depth"]==as.numeric(depth))
+                indices <- which(data[,"column"]==column & data[,"depth"]==depth)
                 
                 # interpolate the variable (the `getDerivative` function is used to estimate the derivative, but with a zero order (n = 0) derivative, which is the function itself)
                 data[indices, variable] <- PRE::getDerivative(x = as.numeric(data[indices,"date"]),
