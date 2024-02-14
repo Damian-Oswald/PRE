@@ -11,7 +11,7 @@ getDerivative(x, y, bandwidth, newdata = NULL, n = 1, h = NULL)
 
 \item{y}{Dependent variable.}
 
-\item{bandwidth}{Hyperparameter for the kernel regression.}
+\item{bandwidth}{A bandwidth specification for the kernel regression function (to read more on this, see \link[np:np.regression]{np::npreg}).}
 
 \item{newdata}{Optional vector of data points for which we want to calculate the derivative. If \code{NULL}, the derivative will be calculated for \code{x}.}
 
@@ -21,7 +21,8 @@ getDerivative(x, y, bandwidth, newdata = NULL, n = 1, h = NULL)
 }
 \description{
 This function numerically approximates the derivative of a function \eqn{f} through the central difference method.
-This method computes the average rate of change over a small interval around the point of interest. The function \eqn{f} is estimated via kernel regression given \code{x}, \code{y} and a hyperparameter \code{bandwidth}.
+This method computes the average rate of change over a small interval around the point of interest (see details for more information).
+The function \eqn{f} is estimated via kernel regression given \code{x}, \code{y} and a hyperparameter \code{bandwidth}.
 }
 \details{
 The central difference method as implemented in the \code{pracma} package approximates the derivative of a function \eqn{f} as:

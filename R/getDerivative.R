@@ -1,11 +1,12 @@
 #' @title Get the derivative of a kernel regression function
 #' 
 #' @description This function numerically approximates the derivative of a function \eqn{f} through the central difference method.
-#' This method computes the average rate of change over a small interval around the point of interest. The function \eqn{f} is estimated via kernel regression given `x`, `y` and a hyperparameter `bandwidth`.
+#' This method computes the average rate of change over a small interval around the point of interest (see details for more information).
+#' The function \eqn{f} is estimated via kernel regression given `x`, `y` and a hyperparameter `bandwidth`.
 #' 
 #' @param x Independent variable.
 #' @param y Dependent variable.
-#' @param bandwidth Hyperparameter for the kernel regression.
+#' @param bandwidth A bandwidth specification for the kernel regression function (to read more on this, see [np::npreg]).
 #' @param newdata Optional vector of data points for which we want to calculate the derivative. If `NULL`, the derivative will be calculated for `x`.
 #' @param n Order of derivative, should only be between 1 and 8. For `n = 0`, function values will be returned.
 #' @param h Step size. By default, the step size will be set automatically. See details.
