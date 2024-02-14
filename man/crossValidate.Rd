@@ -4,23 +4,36 @@
 \alias{crossValidate}
 \title{Perform \code{k}-fold cross-validation}
 \usage{
-crossValidate(FUN, x, y, k = nrow(x), r = 1, hyperparameter = NULL)
+crossValidate(FUN, x, y, k = nrow(x), r = 1, ...)
 }
 \arguments{
 \item{FUN}{The model to repeatedly use as a function. Needs to take exactly four matrix arguments: \code{x_train}, \code{y_train}, \code{x_test}, and \code{y_test}. The function should return whatever evaluation metric we want to use.}
 
 \item{x}{An \eqn{n * p} design matrix of the features to be used by the model.}
 
-\item{y}{A vector of labels.}
+\item{y}{An \eqn{n * 1} matrix of the labels to be used by the model.}
 
 \item{k}{Number of parts in which the data is split for the cross validation process.}
 
 \item{r}{Number of times the cross validation process is repeated.}
 
-\item{hyperparameter}{Hyperparameter for the model \code{FUN}}
-
-\item{type}{Type of cross validation. Defaults to \code{"k-fold"}, though leave-one-out cross validation (\code{"LOOCV"}) is available as well.}
+\item{...}{Additional arguments to be passed to the model \code{FUN}. Any hyperparameters to be evaluated can be passed via this function.}
 }
 \description{
-A function to run an \code{r} times repeated \code{k}-fold cross validation of any sort of model.
+A function to run an \code{r} times repeated \code{k}-fold cross validation of any sort of model \code{FUN}.
+}
+\examples{
+library(PRE)
+
+f <- function(x_train, x_test, y_train, y_test) {
+      model <- lm(y_train ~ ., data = as.data.frame(x_train))
+      y_hat <- predict(model, newdata = as.data.frame(x_test))
+      return(mean((y_test - y_hat)^2))
+}
+
+results <- crossValidate(FUN = f,
+                         x = mtcars[,-1],
+                         y = mtcars[,1,drop=FALSE],
+                         k = 5, r = 100
+)
 }

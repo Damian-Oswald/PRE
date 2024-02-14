@@ -1,10 +1,9 @@
 #' @title Calculate fluxes from measurement data
 #' 
 #' @description
-#' This function calculates nitrous oxide and other fluxes from measurement data, e.g. [PRE::measurements].
+#' This function calculates nitrous oxide fluxes and other parameters from pre-processed measurement data (see [PRE::getMissing] for more information on the pre-processing).
 #' 
-#' @param data Measurement data from which one wants to calculate fluxes.
-#' Needs to include variables `date`, `column`, `depth`, `increment`, `moisture`, `N2O`, `CO2`, `SP`, and `d18O`. For further details, read the description of the [`measurements`] data.
+#' @param data Measurement data from which one wants to calculate fluxes. This needs to be a `data.frame` which includes variables `date`, `column`, `depth`, `increment`, `moisture`, `N2O`, `SP`, and `d18O`. For further details and a reference data frame, read the description of the [`measurements`] data.
 #' @param parameters A set of parameters as returned by the function [`getParameters`]. These will be used in calculating the returned flux data.
 #' @param verbose Logical. Should a progress bar be printed?
 #' 
@@ -30,14 +29,18 @@
 #' \deqn{\theta_{w} = \frac{1}{2}(m_d + m_{d+1})}
 #' From this, the air-filled pore space is computed.
 #' \deqn{\theta_{a} = 1-\frac{\theta_{w}}{\theta_{t}}}
-#' In a next step, the Gas diffusion coefficient is calculated.
+#' In a next step, the Gas diffusion coefficient is calculated \insertCite{millington1961permeability}{PRE}.
 #' \deqn{D_{\text s} = \left( \frac{\theta_w^{10/3} + D_{\text fw}}{H} + \theta_a^{10/3} \times D_{\text fa} \right) \times \theta_T^{-2}}
 #' Note that the diffusivity of N₂O in air \eqn{D_{\text fa}} is a fixed value that is computed by the [getParameters] function.
 #' With all of these values prepared, the N₂O gradient (\eqn{\frac{dC}{dZ}}) is computed.
-#' Note that the atmospheric nitrous oxide concentration is once again defined passed by the [getParameters] function.
-#' Finally, the N₂O flux is calculated as:
+#' \eqn{dC} is the change of N₂O concentration from one layer to the next, while \eqn{dZ} is the vertical distance from one measurement depth to the next.
+#' The atmospheric nitrous oxide concentration is once again passed by the [getParameters] function.
+#' Finally, the N₂O flux is calculated.
 #' \deqn{F_{\text{calc}} = \frac{dC}{dZ} D_{\text s} \rho}
-#' Here, \eqn{\rho} is the gas density of N₂O.
+#' Here, \eqn{\rho} is the gas density of N₂O. This variable is split into "in" and "out" fluxes from the top and bottom layer. For the top layer, a fixed \eqn{F_{\text{top,in}}} is assumed which is passed by [getParameters]. In the lowest layer, \eqn{F_{\text{bottom,in}}} is assumed to be zero.
+#' 
+#' @references
+#' \insertAllCited{}
 #' 
 #' @export
 calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters(), verbose = TRUE) {
