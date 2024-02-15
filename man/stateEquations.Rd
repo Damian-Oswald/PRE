@@ -22,7 +22,3 @@ stateEquations(
 \description{
 The state equation set are the core of the process rate estimator (PRE).
 }
-\details{
-The state equation set incorporates three distinct equations.
-\deqn{\frac{\Delta[N_2O]}{\Delta t}}
-}

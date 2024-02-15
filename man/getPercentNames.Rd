@@ -2,7 +2,7 @@
 % Please edit documentation in R/getPercentNames.R
 \name{getPercentNames}
 \alias{getPercentNames}
-\title{Get Process Names with Quantile Percentages}
+\title{Get Process Names with quantile percentages}
 \usage{
 getPercentNames(
   quantiles,
@@ -10,5 +10,5 @@ getPercentNames(
 )
 }
 \description{
-Get Process Names with Quantile Percentages
+This is an internal function which takes the quantiles as an argument and creates variable names of the quantiles and processes combinations.
 }

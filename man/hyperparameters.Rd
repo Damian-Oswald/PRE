@@ -14,6 +14,6 @@ An object of class \code{array} of dimension 5 x 12 x 5.
 data(hyperparameters, package = "PRE")
 }
 \description{
-These hypertuning parameters (hyperparameters) were optimized on the \link{measurements} data.
+This is a three-dimensional array, where the first dimension are the depths, the second are the columns, and the third are the specific variables such as \code{N2O}, \code{SP}, or \code{d18O}. These hypertuning parameters (specifically, they are bandwidths for the \link[np:np.regression]{np::npreg} function) were optimized on the \link{measurements} data.
 }
 \keyword{datasets}

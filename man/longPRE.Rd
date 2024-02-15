@@ -5,9 +5,9 @@
 \title{Run the Process Rate Estimator on all dates for one experimental unit}
 \usage{
 longPRE(
-  data,
-  column,
-  depth,
+  data = calculateFluxes(),
+  column = NULL,
+  depth = NULL,
   n = 100,
   parameters = getParameters(),
   tolerance = 1000,
@@ -17,7 +17,7 @@ longPRE(
 )
 }
 \arguments{
-\item{data}{A data frame with all relevant variables to run the Process Rate Estimator.}
+\item{data}{A data frame with all relevant variables to run the Process Rate Estimator. Needs to be of the form as the output of \code{\link{calculateFluxes}}.}
 
 \item{column}{The column name for which we want to run the PRE.}
 
@@ -36,5 +36,5 @@ longPRE(
 \item{verbose}{Should a progress bar be printed?}
 }
 \description{
-This function runs the Process Rate Estimator (PRE) on a specific depth and column, but on all available dates.
+This function runs the Process Rate Estimator (PRE) on a specific depth and column, but on all available dates of this specific depth-column-combination.
 }

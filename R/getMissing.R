@@ -5,13 +5,13 @@
 #' Also, it returns the derivatives of the smoothing functions used.
 #' For both procedures, it calls the [getDerivative] function -- simply with `n = 0` and `n = 1`.
 #' 
-#' @param data The original data we wish to interpolate. Needs to have the same variables as [measurements].
-#' @param hyperparameters An array of hyperparameters (bandwidths) used in the kernel regression process.
+#' @param data The original data we wish to interpolate. Needs to be a data frame that is returned by the [getN2ON] function.
+#' @param hyperparameters A three-dimensional array of hyperparameters (bandwidths) used in the kernel regression process. For references, see [hyperparameters].
 #' 
 #' @export
 getMissing <- function(data = getN2ON(), hyperparameters = PRE::hyperparameters) {
     
-    for (variable in c("N2O","N2ONvolume","N2ONarea","SP","d18O")) {
+    for (variable in dimnames(PRE::hyperparameters)[[3]]) {
         
         # make a copy of the *measured* variable, as the original variable will be overwritten
         data[,paste0(variable,"_measurement")] <- data[,variable]

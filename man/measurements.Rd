@@ -7,27 +7,20 @@
 \format{
 \subsection{\code{measurements}}{
 
-A data frame with 9558 rows and  14 columns:
+A data frame with 9640 rows and  9 columns:
 \describe{
 \item{\code{date}}{Date of the measurement [\code{YYYY-MM-DD}].}
-\item{\code{column}}{Experimental unit.}
+\item{\code{column}}{Experimental unit. There are twelve columns in total each with one distinct wheat variety.}
 \item{\code{depth}}{Measurement depth [cm]. Either 7.5, 30, 60, 90, or 120 cm.}
 \item{\code{increment}}{Height of one conceptual soil layer (borders between the different depth layers).}
 \item{\code{variety}}{The wheat variety as a factor. Either \code{"CH Claro"}, \code{"Monte Calme 268"}, \code{"Probus"}, or \code{"Zinal"}.}
 \item{\code{moisture}}{The average moisture over a day.}
 \item{\code{N2O}}{The corrected N₂O concentration.}
-\item{\code{CO2}}{The corrected CO₂ concentration.}
-\item{\code{SP}}{The site preference.}
-\item{\code{d18O}}{The δ¹⁸O concentration.}
-\item{\code{d15Nbulk}}{The bulk δ¹⁵N concentration.}
-\item{\code{d15Nalpha}}{The δ¹⁵N α concentration.}
-\item{\code{d15Nbeta}}{The δ¹⁵N β concentration.}
+\item{\code{SP}}{Site preference (SP), defined as the difference in isotope value between the central and terminal N atom in the N₂O molecule.}
+\item{\code{d18O}}{\eqn{\delta^{18}\text O}, a measure of the deviation in ratio of stable isotopes oxygen-18 (\eqn{^{18}\text O}) and oxygen-16 (\eqn{^{16}\text O}). It is commonly used as an indicator of processes that show isotopic fractionation.}
 ...
 }
 }
-}
-\source{
-\url{https://writethesourceurlorthepaper.com}
 }
 \usage{
 data(measurements, package = "PRE")

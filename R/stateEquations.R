@@ -6,9 +6,6 @@
 #' @param parameters A list of parameters containing the isotope end members. By default, the [`getParameters`] function is used to return these values.
 #' @param fluxes A list of `N2ONarea`, `SP` and `d18O` as well as their fluxes from other increments and derivative. Essentially, this is one row of the data as it's returned by the [`calculateFluxes`] function as a list.
 #' 
-#' @details The state equation set incorporates three distinct equations.
-#' \deqn{\frac{\Delta[N_2O]}{\Delta t}}
-#' 
 #' @export
 stateEquations <- function(x = c(Nitrification = NA, Denitrification = NA, Reduction = NA),
                            parameters = getEpsilons(),

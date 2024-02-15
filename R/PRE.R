@@ -2,6 +2,7 @@
 #' 
 #' @description
 #' This function runs the Process Rate Estimator (PRE) on a specific depth, column and date.
+#' It returns an object of class `PRE`, which allows the use of generic plot and print functions.
 #' 
 #' @param data A data frame with all relevant variables to run the Process Rate Estimator.
 #' @param column The column name for which we want to run the PRE.
@@ -11,6 +12,22 @@
 #' @param n The number of samples solved with the [BB::multiStart] solver.
 #' @param quantiles The probabilities of the quantiles to be returned from the sampled set.
 #' @param verbose Should a success message be printed after a model run?
+#' 
+#' @examples
+#' # prepare data
+#' data <- calculateFluxes()
+#' 
+#' # run PRE
+#' x <- PRE(data, column = 1, depth = 7.5, date = "2016-01-02")
+#' 
+#' # print some basic information
+#' print(x)
+#' 
+#' # visualize the results
+#' plot(x)
+#' 
+#' # show the correlations
+#' pairs(x)
 #' 
 #' @export
 PRE <- function(data, column, depth, date, nonNegative = FALSE, n = 100, parameters = getParameters(), tolerance = 1e3, verbose = TRUE) {

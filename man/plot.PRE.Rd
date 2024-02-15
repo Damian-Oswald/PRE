@@ -7,8 +7,22 @@
 \method{plot}{PRE}(x, col = "grey")
 }
 \arguments{
-\item{x}{The output of the process rate estimator function \code{PRE}.}
+\item{x}{The output of the process rate estimator function \code{\link{PRE}} --- i.e. all the sampled process rate estimates.}
+
+\item{col}{Color of the points.}
 }
 \description{
-Generic plot function for a \code{PRE} class object
+This is the generic plotting function for a \code{\link{PRE}} class object which is returned by the \code{\link{PRE}} function.
+The plot visualizes the distribution of the sampled process rate estimates. The estimates that are sampled together are connected via lines.
+}
+\examples{
+# prepare data
+data <- calculateFluxes()
+
+# run PRE
+x <- PRE(data, column = 1, depth = 7.5, date = "2016-01-02")
+
+# visualize the results
+plot(x)
+
 }

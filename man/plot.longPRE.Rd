@@ -14,7 +14,7 @@
 )
 }
 \arguments{
-\item{x}{The output of the process rate estimator (over time) function \code{longPRE}.}
+\item{x}{The output of the process rate estimator (over time) function \code{\link{longPRE}}.}
 
 \item{which}{Select which part of the plot ought to be plotted. Possible values are \code{"Interpolation"} for the three driving variable plots, \code{"Nitrification"}, \code{"Denitrification"}, and \code{"Reduction"}.}
 
@@ -24,8 +24,27 @@
 
 \item{col}{Plotting color for the uncertainty ranges of the process rate estimates.}
 
-\item{layout}{Logical, should the layout be automatically determined? If \code{FALSE}, no graphical parameters are set.}
+\item{layout}{Logical. Should the layout be automatically determined? If \code{FALSE}, no graphical parameters are set, meaning they may be set externally.}
 }
 \description{
-Generic plot function for a \code{longPRE} class object
+This is the generic plotting function for a \code{longPRE} class object which is returned by the \code{\link{longPRE}} function.
+}
+\examples{
+# prepare data
+data <- calculateFluxes()
+
+# run process rate estimator
+x <- longPRE(data, column = 1, depth = 7.5, n = 10)
+
+# plot result of one variable
+plot(x, which = "Nitrification")
+
+# plot overview with all variables
+plot(x)
+
+# plot overview with fixed y-axis limits
+plot(x, ylim.processes = list(Nitrification = c(-50,50),
+                              Denitrification = NA,
+                              Reduction = NA))
+
 }

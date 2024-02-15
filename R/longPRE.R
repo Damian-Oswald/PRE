@@ -1,9 +1,9 @@
 #' @title Run the Process Rate Estimator on all dates for one experimental unit
 #' 
 #' @description
-#' This function runs the Process Rate Estimator (PRE) on a specific depth and column, but on all available dates.
+#' This function runs the Process Rate Estimator (PRE) on a specific depth and column, but on all available dates of this specific depth-column-combination.
 #' 
-#' @param data A data frame with all relevant variables to run the Process Rate Estimator.
+#' @param data A data frame with all relevant variables to run the Process Rate Estimator. Needs to be of the form as the output of [`calculateFluxes`].
 #' @param column The column name for which we want to run the PRE.
 #' @param depth The depth name for which we want to run the PRE.
 #' @param n The number of samples solved with the [BB::multiStart] solver.
@@ -14,7 +14,7 @@
 #' @param verbose Should a progress bar be printed?
 #' 
 #' @export
-longPRE <- function(data, column, depth, n = 100, parameters = getParameters(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
+longPRE <- function(data = calculateFluxes(), column = NULL, depth = NULL, n = 100, parameters = getParameters(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
     
     # save names of the processes
     processes <- c("Nitrification", "Denitrification", "Reduction")

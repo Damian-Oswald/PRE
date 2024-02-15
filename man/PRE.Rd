@@ -35,4 +35,22 @@ PRE(
 }
 \description{
 This function runs the Process Rate Estimator (PRE) on a specific depth, column and date.
+It returns an object of class \code{PRE}, which allows the use of generic plot and print functions.
+}
+\examples{
+# prepare data
+data <- calculateFluxes()
+
+# run PRE
+x <- PRE(data, column = 1, depth = 7.5, date = "2016-01-02")
+
+# print some basic information
+print(x)
+
+# visualize the results
+plot(x)
+
+# show the correlations
+pairs(x)
+
 }

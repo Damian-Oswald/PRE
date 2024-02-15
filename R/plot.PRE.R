@@ -1,6 +1,21 @@
 #' @title Generic plot function for a `PRE` class object
+#'
+#' @description
+#' This is the generic plotting function for a [`PRE`] class object which is returned by the [`PRE`] function.
+#' The plot visualizes the distribution of the sampled process rate estimates. The estimates that are sampled together are connected via lines.
 #' 
-#' @param x The output of the process rate estimator function `PRE`.
+#' @param x The output of the process rate estimator function [`PRE`] --- i.e. all the sampled process rate estimates.
+#' @param col Color of the points.
+#' 
+#' @examples
+#' # prepare data
+#' data <- calculateFluxes()
+#' 
+#' # run PRE
+#' x <- PRE(data, column = 1, depth = 7.5, date = "2016-01-02")
+#' 
+#' # visualize the results
+#' plot(x)
 #' 
 #' @export
 plot.PRE <- function (x, col = "grey") {

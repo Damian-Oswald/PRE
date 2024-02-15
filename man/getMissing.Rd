@@ -7,9 +7,9 @@
 getMissing(data = getN2ON(), hyperparameters = PRE::hyperparameters)
 }
 \arguments{
-\item{data}{The original data we wish to interpolate. Needs to have the same variables as \link{measurements}.}
+\item{data}{The original data we wish to interpolate. Needs to be a data frame that is returned by the \link{getN2ON} function.}
 
-\item{hyperparameters}{An array of hyperparameters (bandwidths) used in the kernel regression process.}
+\item{hyperparameters}{A three-dimensional array of hyperparameters (bandwidths) used in the kernel regression process. For references, see \link{hyperparameters}.}
 }
 \description{
 This function interpolates the missing values of all variable names in \code{hyperparameters}.

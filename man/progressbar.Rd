@@ -12,5 +12,5 @@ progressbar(i, n)
 \item{n}{The maximum index.}
 }
 \description{
-Show the progress in the console
+This function prints out a progress bar in the console.
 }

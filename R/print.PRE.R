@@ -1,6 +1,21 @@
 #' @title Generic print function for a `PRE` class object
 #' 
+#' @description
+#' This is the generic printing function for a [`PRE`] class object which is returned by the [`PRE`] function.
+#' The function prints out a summary of the distribution of the sampled process estimates.
+#' Additionally, it shows how many solutions converged, and how many have resulted in negative process rates.
+#' 
 #' @param x The output of the process rate estimator function `PRE`.
+#' 
+#' @examples
+#' # prepare data
+#' data <- calculateFluxes()
+#' 
+#' # run PRE
+#' x <- PRE(data, column = 1, depth = 7.5, date = "2016-01-02")
+#' 
+#' # print some basic information
+#' print(x)
 #' 
 #' @export
 print.PRE <- function (x) {

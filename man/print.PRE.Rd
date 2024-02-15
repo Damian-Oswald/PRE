@@ -10,5 +10,18 @@
 \item{x}{The output of the process rate estimator function \code{PRE}.}
 }
 \description{
-Generic print function for a \code{PRE} class object
+This is the generic printing function for a \code{\link{PRE}} class object which is returned by the \code{\link{PRE}} function.
+The function prints out a summary of the distribution of the sampled process estimates.
+Additionally, it shows how many solutions converged, and how many have resulted in negative process rates.
+}
+\examples{
+# prepare data
+data <- calculateFluxes()
+
+# run PRE
+x <- PRE(data, column = 1, depth = 7.5, date = "2016-01-02")
+
+# print some basic information
+print(x)
+
 }

@@ -1,11 +1,32 @@
 #' @title Generic plot function for a `longPRE` class object
 #' 
-#' @param x The output of the process rate estimator (over time) function `longPRE`.
+#' @description
+#' This is the generic plotting function for a `longPRE` class object which is returned by the [`longPRE`] function.
+#' 
+#' @param x The output of the process rate estimator (over time) function [`longPRE`].
 #' @param which Select which part of the plot ought to be plotted. Possible values are `"Interpolation"` for the three driving variable plots, `"Nitrification"`, `"Denitrification"`, and `"Reduction"`.
 #' @param ylim.variable List of the y-axis limits for the driving variables. Must contain exactly three named numeric vectors of length 2. See default argument for reference.
 #' @param ylim.processes List of the y-axis limits for the estimated process rates. Must contain exactly three named numeric vectors of length 2. See default argument for reference.
 #' @param col Plotting color for the uncertainty ranges of the process rate estimates.
-#' @param layout Logical, should the layout be automatically determined? If `FALSE`, no graphical parameters are set.
+#' @param layout Logical. Should the layout be automatically determined? If `FALSE`, no graphical parameters are set, meaning they may be set externally.
+#' 
+#' @examples
+#' # prepare data
+#' data <- calculateFluxes()
+#' 
+#' # run process rate estimator
+#' x <- longPRE(data, column = 1, depth = 7.5, n = 10)
+#' 
+#' # plot result of one variable
+#' plot(x, which = "Nitrification")
+#' 
+#' # plot overview with all variables
+#' plot(x)
+#' 
+#' # plot overview with fixed y-axis limits
+#' plot(x, ylim.processes = list(Nitrification = c(-50,50),
+#'                               Denitrification = NA,
+#'                               Reduction = NA))
 #' 
 #' @export
 plot.longPRE <- function (x, which = c("Interpolation", "Nitrification", "Denitrification","Reduction"), ylim.variable = list(N2ONarea = c(0,10), SP = c(-10,25), d18O = c(20,55)), ylim.processes = list(Nitrification = NA, Denitrification = NA, Reduction = NA), col = "cadetblue", layout = TRUE) {
