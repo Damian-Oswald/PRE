@@ -7,10 +7,12 @@
 getIndices(data, i, parameters)
 }
 \arguments{
-\item{data}{A data frame such as \code{\link{measurements}} with the following variables: \code{date}, \code{column}, and \code{depth}.}
+\item{data}{A data frame such as \code{\link{measurements}} with at least the following variables: \code{date}, \code{column}, and \code{depth}.}
 
-\item{i}{The index of the row of interest.}
+\item{i}{The index of the row of interest (in the data frame \code{data}).}
+
+\item{parameters}{A list of parameters as it's returned by the \code{\link{getParameters}} function.}
 }
 \description{
-Get the indices related to an index
+In the various computations implemented in the process rate estimator, the task of finding the indices related to the measurements above and below a certain measurement comes up repeatedly. This task is automated with this function. It returns the indices of the top \code{i_top} and bottom \code{i_bottom} measurements.
 }
