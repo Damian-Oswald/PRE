@@ -1,7 +1,25 @@
 #' @title Generic print function for a `longPRE` class object
 #' 
+#' @description
+#' This is the generic printing function for a `longPRE` class object which is returned by the [`longPRE`] function.
+#' The function prints out a summary of the distribution of the sampled process estimates over all dates.
+#' Additionally, it shows the percentage of dates on which the median process rate was estimated to be negative.
+#' 
 #' @param x The output of the process rate estimator function `longPRE`.
 #' @param replaceNegative Logical (`TRUE`/`FALSE`). Should the negative values be replaced by zero in order to calculate the mean rates?
+#' 
+#' @examples
+#' # prepare data
+#' data <- calculateFluxes()
+#' 
+#' # run process rate estimator
+#' x <- longPRE(data, column = 1, depth = 7.5, n = 10)
+#' 
+#' # print out basic information
+#' print(x)
+#' 
+#' # plot result of one variable
+#' plot(x, which = "Nitrification")
 #' 
 #' @export
 print.longPRE <- function (x, replaceNegative = TRUE) {

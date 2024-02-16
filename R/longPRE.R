@@ -13,6 +13,25 @@
 #' @param quantiles The probabilities of the quantiles to be returned from the sampled set.
 #' @param verbose Should a progress bar be printed?
 #' 
+#' @examples
+#' # prepare data
+#' data <- calculateFluxes()
+#' 
+#' # run process rate estimator
+#' x <- longPRE(data, column = 1, depth = 7.5, n = 10)
+#' 
+#' # print out basic information
+#' print(x)
+#' 
+#' # plot result of one variable
+#' plot(x, which = "Nitrification")
+#' 
+#' # access the data
+#' x$data
+#' 
+#' # access the final processes
+#' x$processes
+#' 
 #' @export
 longPRE <- function(data = calculateFluxes(), column = NULL, depth = NULL, n = 100, parameters = getParameters(), tolerance = 1e3, nonNegative = FALSE, quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975), verbose = TRUE) {
     
@@ -37,7 +56,7 @@ longPRE <- function(data = calculateFluxes(), column = NULL, depth = NULL, n = 1
     for (t in 1:length(dates)) {
         x <- PRE::PRE(data = data, column = column, depth = depth, date = dates[t], n = n, parameters = parameters, tolerance = tolerance, nonNegative = nonNegative)
         results[t,] <- c(colMeans(x), as.numeric(t(apply(x, 2, quantile, probs = quantiles))))
-        if(verbose) progressbar(t,length(dates))
+        if(verbose) PRE:::progressbar(t,length(dates))
     }
     
     # combine the results with the relevant subset of the data and return it

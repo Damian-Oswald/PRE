@@ -12,5 +12,21 @@
 \item{replaceNegative}{Logical (\code{TRUE}/\code{FALSE}). Should the negative values be replaced by zero in order to calculate the mean rates?}
 }
 \description{
-Generic print function for a \code{longPRE} class object
+This is the generic printing function for a \code{longPRE} class object which is returned by the \code{\link{longPRE}} function.
+The function prints out a summary of the distribution of the sampled process estimates over all dates.
+Additionally, it shows the percentage of dates on which the median process rate was estimated to be negative.
+}
+\examples{
+# prepare data
+data <- calculateFluxes()
+
+# run process rate estimator
+x <- longPRE(data, column = 1, depth = 7.5, n = 10)
+
+# print out basic information
+print(x)
+
+# plot result of one variable
+plot(x, which = "Nitrification")
+
 }

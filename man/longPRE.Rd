@@ -38,3 +38,23 @@ longPRE(
 \description{
 This function runs the Process Rate Estimator (PRE) on a specific depth and column, but on all available dates of this specific depth-column-combination.
 }
+\examples{
+# prepare data
+data <- calculateFluxes()
+
+# run process rate estimator
+x <- longPRE(data, column = 1, depth = 7.5, n = 10)
+
+# print out basic information
+print(x)
+
+# plot result of one variable
+plot(x, which = "Nitrification")
+
+# access the data
+x$data
+
+# access the final processes
+x$processes
+
+}

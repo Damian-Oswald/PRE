@@ -73,7 +73,7 @@ calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters
         data[i,"F"] <- with(data[i,], dCdZ * Ds * rho * 10000 * 3600 * 24/1000)
         
         # print out a progress bar
-        if(verbose) PRE::progressbar(i, nrow(data)*2)
+        if(verbose) PRE:::progressbar(i, nrow(data)*2)
     }
     
     # start a new loop, to make sure all `F` have been calculated already
@@ -118,7 +118,7 @@ calculateFluxes <- function(data = getMissing(), parameters = PRE::getParameters
         }
         
         # print out a progress bar
-        if(verbose) PRE::progressbar(nrow(data)+i, nrow(data)*2)
+        if(verbose) PRE:::progressbar(nrow(data)+i, nrow(data)*2)
     }
     
     return(data)
