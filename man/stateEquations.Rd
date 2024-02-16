@@ -20,5 +20,20 @@ stateEquations(
 \item{fluxes}{A list of \code{N2ONarea}, \code{SP} and \code{d18O} as well as their fluxes from other increments and derivative. Essentially, this is one row of the data as it's returned by the \code{\link{calculateFluxes}} function as a list.}
 }
 \description{
-The state equation set are the core of the process rate estimator (PRE).
+The state equation set are the core of the process rate estimator (PRE). This set of three functions is evaluated repeatedly by the solver in order to find well suiting process rates.
+}
+\details{
+The process rate estimator includes three-state functions, describing the change in N₂O concentrations over time.
+The change in N₂O concentrations in each depth increment over time \eqn{\frac{\Delta}{\Delta t}[{\text N_2 \text O}]} depends on the flux of N₂O entering the depth increment from the top or the bottom through diffusion (\eqn{\text F_\text{t,i}} and \eqn{\text F_\text {b,i}}, respectively), the flux of N₂O leaving the depth increment through diffusion (\eqn{\text F_\text {out}}), the rate of N₂O produced through nitrification (\code{N2Onit}), the rate of N₂O produced through denitrification (\code{N2Oden}), and the rate of N₂O reduced to N₂ (\code{N2Ored}).
+\deqn{\frac{\Delta[{\text N_2 \text O}]}{\Delta t} = \text F_{\text{t,i}} + \text F_{\text{b,i}}  + {\text N_2 \text O}_{\text{nit.}} + {\text N_2 \text O}_{\text{den.}} + {\text N_2 \text O}_{\text{red.}}}
+For the equation of the change of site preference over time, we'll use the substitutions \eqn{A_1}, \eqn{A_2} and \eqn{A_3}, as the expression is rather long.
+\deqn{\frac{\Delta \text{SP}}{\Delta t} = \frac{A_1 + A_2 + A_3}{[{\text N_2 \text O}]}}
+\deqn{A_1 = \text F_{\text{t,i}}(\text{SP}_{\text{t,i}} - \eta \text{SP}_\text{diff.} - \text{SP}) + \text F_{\text{b,i}}(\text{SP}_{\text{b,i}} - \eta \text{SP}_\text{diff.} - \text{SP})}
+\deqn{A_2 = {\text N_2 \text O}_{\text{nit.}}(\text{SP}_\text{nit.} - \text{SP}) + {\text N_2 \text O}_{\text{den.}}(\text{SP}_\text{den.} - \text{SP})}
+\deqn{A_3 = - \eta \text{SP}_\text{diff.} \text F_{\text{out}} - \eta\text{SP}_\text{red.} {\text N_2 \text O}_{\text{red.}}}
+Similar to \eqn{\text{SP}}, the change in \eqn{\delta^{18}\text O} over time in each time point and depth increment can be described as:
+\deqn{\frac{\Delta\delta^{18}\text{O}}{\Delta t} = \frac{B_1 + B_2 + B_3}{[{\text N_2 \text O}]}}
+\deqn{B_1 = \text F_{\text{t,i}}(\delta^{18}\text{O}_{\text{t,i}} - \eta^{18}\text{O}_\text{diff.} - \delta^{18}\text{O}) + \text F_{\text{b,i}}(\delta^{18}\text{O}_{\text{b,i}} - \eta^{18}\text{O}_\text{diff.} - \delta^{18}\text{O})}
+\deqn{B_2 = {\text N_2 \text O}_{\text{nit.}}(\delta^{18}\text{O}_\text{nit.} - \delta^{18}\text{O}) + {\text N_2 \text O}_{\text{den.}}(\delta^{18}\text{O}_\text{den.} - \delta^{18}\text{O})}
+\deqn{B_3 = - \eta^{18}\text{O}_\text{diff.} \text F_{\text{out}} - \eta^{18}\text{O}_\text{red.} \text{N}_2 \text{O}_{\text{red.}}}
 }
