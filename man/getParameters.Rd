@@ -18,14 +18,14 @@ getParameters(
   D_fa = 1.436e-05 * (temperature/273.15)^1.81,
   H = (8547000 * exp(-2284/temperature))/(8.3145 * temperature),
   depths = c(7.5, 30, 60, 90, 120),
-  SP_nitrification = 34.4,
-  SP_denitrification = -2.4,
+  SP_nitrification = 35,
+  SP_denitrification = -4.85,
   eta_SP_diffusion = 1.55,
-  eta_SP_reduction = -5.3,
-  d18O_nitrification = 36.5,
-  d18O_denitrification = 11.1,
+  eta_SP_reduction = -5.9,
+  d18O_nitrification = 23.5,
+  d18O_denitrification = 9.3,
   eta_18O_diffusion = -7.79,
-  eta_18O_reduction = -16.1
+  eta_18O_reduction = -15.4
 )
 }
 \arguments{
