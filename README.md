@@ -1,7 +1,7 @@
 The R package PRE
 =================
 
-A repository for the R package containing the code for the process rate estimator (PRE). Note that this README file contains only a very brief documentation. For a more comprehensive overview, please visit the [documentation site](https://github.com/Damian-Oswald/process-rate-estimator/).
+A repository for the R package containing the code for the process rate estimator (PRE). Note that this README file contains only a very brief documentation. For a more comprehensive overview, please visit the [documentation site](https://damian-oswald.github.io/process-rate-estimator/).
 
 # Installation
 
