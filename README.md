@@ -12,7 +12,7 @@ install.packages("remotes")
 remotes::install_github("https://github.com/Damian-Oswald/PRE")
 ```
 
-Next, attach the library to your search path and your good to go!
+Next, attach the library to your search path and you're good to go!
 
 ```r
 library(PRE)
